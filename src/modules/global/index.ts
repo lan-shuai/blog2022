@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { ETheme } from 'types/';
-import { CHART_COLORS, defaultColor, colorMap } from 'configs/color';
+// import { ETheme } from 'types/';
+// import { CHART_COLORS, defaultColor, colorMap } from 'configs/color';
 import { RootState } from '../../modules/store';
 import { version } from '../../../package.json';
 
@@ -21,11 +21,11 @@ export interface IGlobalState {
    */
   setting: boolean;
   version: string;
-  color: string;
+  // color: string;
   /**
    * 主题：深色 浅色
    */
-  theme: ETheme;
+  // theme: ETheme;
   /**
    * 是否开启跟随系统主题
    */
@@ -35,25 +35,25 @@ export interface IGlobalState {
   showHeader: boolean;
   showBreadcrumbs: boolean;
   showFooter: boolean;
-  chartColors: Record<string, string>;
+  // chartColors: Record<string, string>;
 }
 
-const defaultTheme = ETheme.light;
+// const defaultTheme = ETheme.light;
 
 const initialState: IGlobalState = {
   loading: true,
   collapsed: window.innerWidth < 1000, // 宽度小于1000 菜单闭合
   setting: false,
   version,
-  theme: defaultTheme,
+  // theme: defaultTheme,
   systemTheme: false,
   layout: ELayout.side,
   isFullPage: false,
-  color: defaultColor?.[0],
+  // color: defaultColor?.[0],
   showHeader: true,
   showBreadcrumbs: true,
   showFooter: true,
-  chartColors: CHART_COLORS[defaultTheme],
+  // chartColors: CHART_COLORS[defaultTheme],
 };
 
 // 创建带有命名空间的reducer
@@ -80,34 +80,34 @@ const globalSlice = createSlice({
     toggleShowFooter: (state) => {
       state.showFooter = !state.showFooter;
     },
-    switchTheme: (state, action: PayloadAction<ETheme>) => {
-      const finalTheme = action?.payload;
-      // 切换 chart 颜色
-      state.chartColors = CHART_COLORS[finalTheme];
-      // 切换主题颜色
-      state.theme = finalTheme;
-      // 关闭跟随系统
-      state.systemTheme = false;
-      document.documentElement.setAttribute('theme-mode', finalTheme);
-    },
-    openSystemTheme: (state) => {
-      const media = window.matchMedia('(prefers-color-scheme:dark)');
-      if (media.matches) {
-        const finalTheme = media.matches ? ETheme.dark : ETheme.light;
-        state.chartColors = CHART_COLORS[finalTheme];
-        // 切换主题颜色
-        state.theme = finalTheme;
-        state.systemTheme = true;
-        document.documentElement.setAttribute('theme-mode', finalTheme);
-      }
-    },
-    switchColor: (state, action) => {
-      if (action?.payload) {
-        state.color = action?.payload;
-        const colorType = colorMap?.[action?.payload];
-        document.documentElement.setAttribute('theme-color', colorType || '');
-      }
-    },
+    // switchTheme: (state, action: PayloadAction<ETheme>) => {
+    //   const finalTheme = action?.payload;
+    //   // 切换 chart 颜色
+    //   state.chartColors = CHART_COLORS[finalTheme];
+    //   // 切换主题颜色
+    //   state.theme = finalTheme;
+    //   // 关闭跟随系统
+    //   state.systemTheme = false;
+    //   document.documentElement.setAttribute('theme-mode', finalTheme);
+    // },
+    // openSystemTheme: (state) => {
+    //   const media = window.matchMedia('(prefers-color-scheme:dark)');
+    //   if (media.matches) {
+    //     const finalTheme = media.matches ? ETheme.dark : ETheme.light;
+    //     state.chartColors = CHART_COLORS[finalTheme];
+    //     // 切换主题颜色
+    //     state.theme = finalTheme;
+    //     state.systemTheme = true;
+    //     document.documentElement.setAttribute('theme-mode', finalTheme);
+    //   }
+    // },
+    // switchColor: (state, action) => {
+    //   if (action?.payload) {
+    //     state.color = action?.payload;
+    //     const colorType = colorMap?.[action?.payload];
+    //     document.documentElement.setAttribute('theme-color', colorType || '');
+    //   }
+    // },
     switchLayout: (state, action) => {
       if (action?.payload) {
         state.layout = action?.payload;
@@ -128,11 +128,11 @@ export const {
   toggleShowHeader,
   toggleShowBreadcrumbs,
   toggleShowFooter,
-  switchTheme,
-  switchColor,
+  // switchTheme,
+  // switchColor,
   switchLayout,
   switchFullPage,
-  openSystemTheme,
+  // openSystemTheme,
 } = globalSlice.actions;
 
 export default globalSlice.reducer;
