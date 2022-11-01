@@ -7,24 +7,19 @@ import React, { memo, useEffect } from 'react';
 import AppLayout from './components/AppLayout';
 // import Style from './index.module.less';
 
-
 import { Routes, Route, Navigate } from 'react-router-dom';
+import { Button } from 'antd';
 
-const Test1 = React.memo(() => {
-  return (
-    <div>Test1</div>
-  )
-})
+const Test1 = React.memo(() => (
+  <div>
+    <Button>测试按钮1</Button>
+    Test1
+  </div>
+));
 
-const Test2 = React.memo(() => {
-  return (
-    <div>Test2</div>
-  )
-})
+const Test2 = React.memo(() => <div>Test2</div>);
 
-
-
-export default memo(() => {
+export default memo(() => (
   // const globalState = useAppSelector(selectGlobal);
   // const dispatch = useAppDispatch();
 
@@ -46,31 +41,28 @@ export default memo(() => {
   //   };
   // }, []);
 
-  return (
-    // <Layout className={Style.panel}>
-    //   <AppContainer />
-    //   <Drawer
-    //     destroyOnClose
-    //     visible={globalState.setting}
-    //     size='458px'
-    //     footer={false}
-    //     header='页面配置'
-    //     onClose={() => dispatch(toggleSetting())}
-    //   >
-    //     <Setting />
-    //   </Drawer>
-    // </Layout>
-    <div>
-      {/* <AppContainer/> */}
+  // <Layout className={Style.panel}>
+  //   <AppContainer />
+  //   <Drawer
+  //     destroyOnClose
+  //     visible={globalState.setting}
+  //     size='458px'
+  //     footer={false}
+  //     header='页面配置'
+  //     onClose={() => dispatch(toggleSetting())}
+  //   >
+  //     <Setting />
+  //   </Drawer>
+  // </Layout>
+  <div>
+    {/* <AppContainer/> */}
 
-      {/* <Test1/>
+    {/* <Test1/>
       <Test2/> */}
-      <Routes>
-        {/* <Route path="/" element={<Test1/>} /> */}
-        <Route path="/test1" element={<Test1/>} ></Route>
-        <Route path="/test2" element={<Test2/>} ></Route>
-      </Routes>
-
-    </div>
-  );
-});
+    <Routes>
+      <Route path='/' element={<Test1 />} />
+      <Route path='/test1' element={<Test1 />}></Route>
+      <Route path='/test2' element={<Test2 />}></Route>
+    </Routes>
+  </div>
+));
