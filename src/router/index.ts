@@ -41,6 +41,13 @@ export const routes: IRouter[] = [
     path: '/archives',
     text: '归档',
     Component: lazy(() => import('../pages/Archives')),
+    children: [
+      {
+        path: 'detail',
+        text: '详情',
+        Component: lazy(() => import('../pages/Detail')),
+      },
+    ],
   },
   {
     path: '/about',
