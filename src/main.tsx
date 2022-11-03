@@ -17,7 +17,6 @@ const renderApp = () => {
     <Provider store={store}>
       <HashRouter>
         <App />
-        测试
       </HashRouter>
     </Provider>,
     document.getElementById('app'),

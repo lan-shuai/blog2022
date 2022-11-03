@@ -1,57 +1,50 @@
-import React, { lazy } from 'react';
-import { BrowserRouterProps } from 'react-router-dom';
-// import dashboard from './modules/dashboard';
-// import list from './modules/list';
-// import form from './modules/form';
-// import detail from './modules/detail';
-// import result from './modules/result';
-// import user from './modules/user';
-// import login from './modules/login';
-// import otherRoutes from './modules/others';
+import React, { memo, lazy, Suspense } from 'react';
+
+import { Routes, Route, BrowserRouterProps } from 'react-router-dom';
 
 export interface IRouter {
   path: string;
-  redirect?: string;
-  Component?: React.FC<BrowserRouterProps> | (() => any);
+  text: string;
+  //   redirect?: string;
+  Component: React.FC<BrowserRouterProps> | (() => any);
   /**
    * 当前路由是否全屏显示
    */
-  isFullPage?: boolean;
+  //   isFullPage?: boolean;
   /**
    * meta未赋值 路由不显示到菜单中
    */
-  meta?: {
-    title?: string;
-    Icon?: React.FC;
-    /**
-     * 侧边栏隐藏该路由
-     */
-    hidden?: boolean;
-    /**
-     * 单层路由
-     */
-    single?: boolean;
-  };
+  //   meta?: {
+  //     title?: string;
+  //     Icon?: React.FC;
+  //     /**
+  //      * 侧边栏隐藏该路由
+  //      */
+  //     hidden?: boolean;
+  //     /**
+  //      * 单层路由
+  //      */
+  //     single?: boolean;
+  //   };
   children?: IRouter[];
 }
 
-const routes: IRouter[] = [
+// interface IRenderRoutes = (routes: IRouter[], parentPath?: string, breadcrumbs?: string[]) => React.ReactNode[];
+
+export const routes: IRouter[] = [
   {
     path: '/overview',
+    text: '主页',
     Component: lazy(() => import('../pages/Overview')),
-    isFullPage: true,
-    meta: {
-      hidden: true,
-    },
   },
   {
-    path: '/',
-    redirect: '/overview',
+    path: '/archives',
+    text: '归档',
+    Component: lazy(() => import('../pages/Archives')),
+  },
+  {
+    path: '/about',
+    text: '关于',
+    Component: lazy(() => import('../pages/About')),
   },
 ];
-
-const allRoutes = [...routes,
-  //  ...dashboard, ...list, ...form, ...detail, ...result, ...user, ...login, ...otherRoutes
-  ];
-
-export default allRoutes;

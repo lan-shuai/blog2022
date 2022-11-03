@@ -5,16 +5,12 @@ import { selectGlobal } from 'modules/global';
 
 import Style from './index.module.less';
 
-export default memo(() => {
-  const [type, setType] = useState('login');
-  const globalState = useAppSelector(selectGlobal);
-  const handleSwitchLoginType = () => {
-    setType(type === 'register' ? 'login' : 'register');
-  };
+export default memo(() => (
+  // const [type, setType] = useState('login');
+  // const globalState = useAppSelector(selectGlobal);
+  // const handleSwitchLoginType = () => {
+  //   setType(type === 'register' ? 'login' : 'register');
+  // };
 
-  return (
-    <div>
-        Overview
-    </div>
-  );
-});
+  <div>Overview</div>
+));
