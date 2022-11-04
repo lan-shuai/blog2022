@@ -3,41 +3,26 @@ import React, { memo, lazy, Suspense, ReactNode } from 'react';
 import { Routes, Route } from 'react-router-dom';
 import { routes, IRouter } from '../../router';
 
-import Archives from 'pages/Archives';
-import Details from 'pages/Detail';
-
-export const renderRouter = (routers: IRouter[]) => {
+export const renderRouter = (routers: IRouter[], prefix = ''): JSX.Element[] => {
   if (!routes.length) {
-    return;
+    return [];
   }
-  // eslint-disable-next-line consistent-return
-  return routers.map((router, index) => {
+  return routers.reduce((prev, router, index) => {
     const { path, Component, children } = router;
-    return (
-      <Route key={index} path={path} element={<Component />}>
-        {renderRouter(children || [])}
-      </Route>
-    );
-  });
+    const fullPath = prefix ? `${prefix}/${path}` : path;
+    return prev
+      .concat(<Route key={index} path={fullPath} element={<Component />}></Route>)
+      .concat(renderRouter(children || [], fullPath));
+  }, [] as JSX.Element[]);
 };
 
-export default memo(() => (
-  <div>
-    <Suspense fallback={<div>加载中</div>}>
-      <Routes>
-        {/* {renderRouter(routes)} */}
-        <Route path='/archives' element={<Archives />}>
-          <Route path='/detail' element={<Details />}></Route>
-        </Route>
-      </Routes>
-    </Suspense>
-
-    {/* <Routes> */}
-    {/* <Route path='/' element={<Test1 />} /> */}
-    {/* <Route path='/test1' element={<Test1 />}></Route>
-        <Route path='/test2' element={<Test2 />}></Route> */}
-    {/* <Route path='/about' element={<About />}></Route>
-      {renderRouter(routes)}
-    </Routes> */}
-  </div>
-));
+export default memo(() => {
+  console.log(renderRouter(routes));
+  return (
+    <div>
+      <Suspense fallback={<div>加载中</div>}>
+        <Routes>{renderRouter(routes)}</Routes>
+      </Suspense>
+    </div>
+  );
+});
