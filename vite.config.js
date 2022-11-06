@@ -7,6 +7,7 @@ export default (params) => ({
   base: './',
   resolve: {
     alias: {
+      '@': path.resolve(__dirname, 'src'),
       assets: path.resolve(__dirname, './src/assets'),
       components: path.resolve(__dirname, './src/components'),
       configs: path.resolve(__dirname, './src/configs'),
@@ -27,6 +28,11 @@ export default (params) => ({
       less: {
         modifyVars: {
           // 如需自定义组件其他 token, 在此处配置
+        },
+        preprocessorOptions: {
+          less: {
+            javascriptEnabled: true,
+          },
         },
       },
     },
